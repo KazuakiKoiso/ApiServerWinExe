@@ -33,7 +33,7 @@ namespace ApiServerWinExe.Controllers
     /// </summary>
     public interface IRead
     {
-        dynamic Read(NameValueCollection headers, string requestBody, string id);
+        dynamic Read(NameValueCollection headers, string[] urlSegments);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace ApiServerWinExe.Controllers
     /// </summary>
     public interface IAsyncRead
     {
-        Task<dynamic> ReadAsync(NameValueCollection headers, string requestBody, string id);
+        Task<dynamic> ReadAsync(NameValueCollection headers, string[] urlSegments);
     }
 
     /// <summary>

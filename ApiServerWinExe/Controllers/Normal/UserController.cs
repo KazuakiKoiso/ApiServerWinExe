@@ -46,11 +46,11 @@ namespace ApiServerWinExe.Controllers.Normal
 
         /// <summary>ユーザ取得</summary>
         /// <param name="headers"></param>
-        /// <param name="requestBody"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dynamic Read(NameValueCollection headers, string requestBody, string id)
+        public dynamic Read(NameValueCollection headers, string[] urlSegments)
         {
+            var id = urlSegments.FirstOrDefault();
             if (string.IsNullOrEmpty(id))
             {
                 return UserRepository.Instance.GetUsers().OrderBy(u => u.Id);

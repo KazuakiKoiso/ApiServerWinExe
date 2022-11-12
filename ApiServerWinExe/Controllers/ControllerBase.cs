@@ -13,6 +13,7 @@ namespace ApiServerWinExe.Controllers
             if (!headers.AllKeys.Contains("Content-Type"))
             {
                 headers.Add("Content-Type:application/json; charaset=utf8");
+                headers.Add("Access-Control-Allow-Origin: *");
             }
         }
     }

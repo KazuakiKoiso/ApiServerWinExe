@@ -20,7 +20,7 @@ namespace ApiServerWinExe.Controllers.Error
             => new ErrorResult()
             {
                 Code = (int)StatusCode,
-                Message = $"リソースが見つかりません。({urlSegments[2]})",
+                Message = $"リソースが見つかりません。({urlSegments[1]})",
             };
     }
 }

@@ -1,35 +1,26 @@
 ﻿using ApiServerWinExe.Controllers.Attributes;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiServerWinExe.Controllers.Normal
 {
     /// <summary>Hello</summary>
     [Controller("Hello")]
-    public class HelloController : ControllerBase, IAsyncRead
+    public class HelloController : ControllerBase, IRead
     {
-        public Task<dynamic> ReadAsync(NameValueCollection headers, string requestBody, string id)
+        public dynamic Read(NameValueCollection headers, string[] urlSegments)
         {
-            return Task.Run<dynamic>(() =>
+            var name = urlSegments.FirstOrDefault();
+            if (string.IsNullOrEmpty(name))
             {
-                var body = new { Name = string.Empty };
-                body = JsonConvert.DeserializeAnonymousType(requestBody, body);
-                if (string.IsNullOrEmpty(body?.Name))
-                {
-                    return new
-                    {
-                        Message = "こんにちは！",
-                    };
-                }
-                else
-                {
-                    return new
-                    {
-                        Message = $"こんにちは、{body?.Name}さん！",
-                    };
-                }
-            });
+                return new { Message = "こんにちは！" };
+            }
+            else
+            {
+                return new { Message = $"こんにちは！{name}さん！" };
+            }
         }
     }
 }

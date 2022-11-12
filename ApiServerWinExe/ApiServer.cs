@@ -51,8 +51,8 @@ namespace ApiServerWinExe
         }
 
         /// <summary>Listen開始</summary>
-        public void StartListen()
-            => _listener?.StartListen();
+        public void StartListen(string address, int port)
+            => _listener?.StartListen(address, port);
 
         /// <summary>Listen停止</summary>
         public void StopListen()
@@ -70,7 +70,7 @@ namespace ApiServerWinExe
             dynamic result = null;
 
             // リクエストがhttp://localhost/Temprary_Listen_Addressesで終わっている場合はエラーとする
-            if (urlSegments.Length < 3)
+            if (urlSegments.Length < 2)
             {
                 OnRequested?.Invoke(this, new ServerEventArgs()
                 {
@@ -83,12 +83,12 @@ namespace ApiServerWinExe
             }
             else
             {
-                resourceName = urlSegments[2];
+                resourceName = urlSegments[1];
                 OnRequested?.Invoke(this, new ServerEventArgs()
                 {
                     Method = request.HttpMethod,
                     Headers = request.Headers,
-                    Url = string.Join("/", urlSegments.Skip(2)),
+                    Url = string.Join("/", urlSegments.Skip(1)),
                     Body = requestBody,
                 });
                 // コントローラを探して実行する
@@ -98,7 +98,7 @@ namespace ApiServerWinExe
                     controller.SetResponseHeaders(response.Headers);
                     if (request.HttpMethod.ToUpper() == "GET")
                     {
-                        result = await OnGetReceivedAsync(request.Headers, urlSegments, requestBody, controller);
+                        result = await OnGetReceivedAsync(request.Headers, urlSegments, controller);
                         response.StatusCode = (int)HttpStatusCode.OK;
                     }
                     else if (request.HttpMethod.ToUpper() == "POST")
@@ -138,7 +138,7 @@ namespace ApiServerWinExe
             OnResponsed?.Invoke(this, new ServerEventArgs()
             {
                 Method = request.HttpMethod,
-                Url = string.Join("/", urlSegments.Skip(2)),
+                Url = string.Join("/", urlSegments.Skip(1)),
                 Headers = response.Headers,
                 Body = responseBody,
             });
@@ -147,21 +147,20 @@ namespace ApiServerWinExe
         /// <summary>GETメソッド受信時</summary>
         /// <param name="requestHeaders"></param>
         /// <param name="urlSegments"></param>
-        /// <param name="requestBody"></param>
         /// <param name="controller"></param>
         /// <returns></returns>
-        private async Task<dynamic> OnGetReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
+        private async Task<dynamic> OnGetReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, ControllerBase controller)
         {
-            string id = urlSegments.Length > 3 ? urlSegments[3] : null;
             try
             {
+                var parameters = urlSegments.Skip(2);
                 if (controller is IAsyncRead asyncRead)
                 {
-                    return await asyncRead.ReadAsync(requestHeaders, requestBody, id);
+                    return await asyncRead.ReadAsync(requestHeaders, parameters.ToArray());
                 }
                 else if (controller is IRead read)
                 {
-                    return read.Read(requestHeaders, requestBody, id);
+                    return read.Read(requestHeaders, parameters.ToArray());
                 }
                 else
                 {
@@ -187,14 +186,15 @@ namespace ApiServerWinExe
             string method = urlSegments.Last();
             try
             {
+                var parameters = urlSegments.Skip(2).ToArray();
                 switch (method.ToUpper())
                 {
                     case "CREATE":
-                        return OnPostCreateReceivedAsync(requestHeaders, urlSegments, requestBody, controller);
+                        return OnPostCreateReceivedAsync(requestHeaders, parameters, requestBody, controller);
                     case "UPDATE":
-                        return OnPostUpdateReceivedAsync(requestHeaders, urlSegments, requestBody, controller);
+                        return OnPostUpdateReceivedAsync(requestHeaders, parameters, requestBody, controller);
                     case "DELETE":
-                        return OnPostDeleteReceivedAsync(requestHeaders, urlSegments, requestBody, controller);
+                        return OnPostDeleteReceivedAsync(requestHeaders, parameters, requestBody, controller);
                     default:
                         // CRUD外なのでNotImplemented
                         return Task.FromResult<dynamic>(ControllerFactory.Instance.CreateErrorController(HttpStatusCode.NotImplemented));

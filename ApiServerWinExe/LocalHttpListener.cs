@@ -26,7 +26,7 @@ namespace ApiServerWinExe
         }
 
         /// <summary>Listen開始</summary>
-        public void StartListen()
+        public void StartListen(string address, int port)
         {
             _listener = new HttpListener();
             _listener.Prefixes.Clear();
@@ -36,7 +36,8 @@ namespace ApiServerWinExe
 
             // こうすると管理者権限がなくてもHttpListenerでListenできるらしい
             // WCFによるプロセス間HTTP通信のために特別なURLが用意されているのだとか
-            _listener.Prefixes.Add($"http://+:80/Temporary_Listen_Addresses/");
+            //_listener.Prefixes.Add($"http://+:8080/Temporary_Listen_Addresses/");
+            _listener.Prefixes.Add($"http://{address}:{port}/");
 
             _listener.Start();
             _listener.BeginGetContext(new AsyncCallback(OnContext), _listener);

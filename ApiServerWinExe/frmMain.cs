@@ -80,7 +80,16 @@ namespace ApiServerWinExe
             btnPower.Text = after ? "受信中" : "停止中";
             btnPower.BackColor = after ? Color.Lime : Color.Red;
 
-            (after ? (Action)_server.StartListen : _server.StopListen)();
+            txtAddress.Enabled = before;
+            numPort.Enabled = before;
+            if (after)
+            {
+                _server.StartListen(txtAddress.Text.Trim(), (int)numPort.Value);
+            }
+            else
+            {
+                _server.StopListen();
+            }
         }
 
         /// <summary>PrettyResponseのチェック状態変化</summary>
