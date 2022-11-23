@@ -7,11 +7,11 @@ namespace ApiServerWinExe.Extensions
 {
     public static class HttpListenerRequestExtension
     {
-        public static Task<string> GetRequestBodyAsync(this HttpListenerRequest @this)
+        public static async Task<string> GetRequestBodyAsync(this HttpListenerRequest @this)
         {
             using (StreamReader sr = new StreamReader(@this.InputStream))
             {
-                return sr.ReadToEndAsync();
+                return await sr.ReadToEndAsync();
             }
         }
 

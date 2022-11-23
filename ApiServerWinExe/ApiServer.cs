@@ -183,7 +183,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private Task<dynamic> OnPostReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string method = urlSegments.Last();
+            string method = urlSegments.Skip(2).FirstOrDefault();
             try
             {
                 var parameters = urlSegments.Skip(2).ToArray();
@@ -235,7 +235,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private async Task<dynamic> OnPostUpdateReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string id = urlSegments.Length > 3 ? urlSegments[3] : null;
+            string id = urlSegments.ElementAtOrDefault(1);
             if (controller is IAsyncUpdate asyncUpdate)
             {
                 return await asyncUpdate.UpdateAsync(requestHeaders, requestBody, id);
@@ -256,7 +256,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private async Task<dynamic> OnPostDeleteReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string id = urlSegments.Length > 3 ? urlSegments[3] : null;
+            string id = urlSegments.ElementAtOrDefault(1);
             if (controller is IAsyncDelete asyncDelete)
             {
                 return await asyncDelete.DeleteAsync(requestHeaders, requestBody, id);
