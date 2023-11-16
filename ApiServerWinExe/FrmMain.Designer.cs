@@ -42,6 +42,7 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.clmIp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +79,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmId,
+            this.clmIp,
             this.clmDirection,
             this.clmMethod,
             this.clmResource,
@@ -192,6 +194,11 @@
             0,
             0});
             // 
+            // clmIp
+            // 
+            this.clmIp.Text = "Ip";
+            this.clmIp.Width = 150;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -232,6 +239,7 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numPort;
+        private System.Windows.Forms.ColumnHeader clmIp;
     }
 }
 

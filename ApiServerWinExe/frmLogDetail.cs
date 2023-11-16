@@ -23,6 +23,8 @@ namespace ApiServerWinExe
             lblDirection.Text = $"方向：{(log.Direction == Direction.Received ? "受信" : "返信")}";
             lblMethod.Text = $"HTTPメソッド：{log.Method}";
             lblResource.Text = $"対象リソース：{log.Resource}";
+            lblIp.Text = $"IP : {log.Ip}";
+
 
             _sorter = new ListItemSorter(lvHeader);
             var items = log.Headers.AllKeys

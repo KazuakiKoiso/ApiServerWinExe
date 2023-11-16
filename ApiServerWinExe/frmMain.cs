@@ -24,6 +24,7 @@ namespace ApiServerWinExe
             _server.OnResponsed += _server_OnResponsed;
 
             clmId.Tag = nameof(ApiLog.Id);
+            clmIp.Tag = nameof(ApiLog.Ip);
             clmDirection.Tag = (Func<ApiLog, string>)(
                 log => log.Direction == Direction.Received ? "→" : "←");
             clmMethod.Tag = nameof(ApiLog.Method);
@@ -113,6 +114,7 @@ namespace ApiServerWinExe
                 ApiLog log = new ApiLog()
                 {
                     Id = lvLog.ItemsEx<ApiLog>().Count() + 1,
+                    Ip = e.Ip,
                     Timestamp = DateTime.Now,
                     Direction = Direction.Received,
                     Method = e.Method,
@@ -137,6 +139,7 @@ namespace ApiServerWinExe
                 ApiLog log = new ApiLog()
                 {
                     Id = lvLog.ItemsEx<ApiLog>().Count() + 1,
+                    Ip = e.Ip,
                     Timestamp = DateTime.Now,
                     Direction = Direction.Responsed,
                     Method = e.Method,
