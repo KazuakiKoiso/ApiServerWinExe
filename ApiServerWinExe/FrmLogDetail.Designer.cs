@@ -1,6 +1,6 @@
 ﻿namespace ApiServerWinExe
 {
-    partial class FrmLogDetail
+    partial class frmLogDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtBody = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblIp = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblId
@@ -101,7 +102,7 @@
             this.lvHeader.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lvHeader.FullRowSelect = true;
             this.lvHeader.HideSelection = false;
-            this.lvHeader.Location = new System.Drawing.Point(16, 113);
+            this.lvHeader.Location = new System.Drawing.Point(16, 148);
             this.lvHeader.Name = "lvHeader";
             this.lvHeader.Size = new System.Drawing.Size(613, 137);
             this.lvHeader.TabIndex = 5;
@@ -124,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(12, 88);
+            this.label1.Location = new System.Drawing.Point(12, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 22);
             this.label1.TabIndex = 3;
@@ -136,30 +137,41 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBody.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtBody.Location = new System.Drawing.Point(16, 278);
+            this.txtBody.Location = new System.Drawing.Point(16, 314);
             this.txtBody.MaxLength = 65535;
             this.txtBody.Multiline = true;
             this.txtBody.Name = "txtBody";
             this.txtBody.ReadOnly = true;
             this.txtBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBody.Size = new System.Drawing.Size(613, 250);
+            this.txtBody.Size = new System.Drawing.Size(613, 261);
             this.txtBody.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(12, 253);
+            this.label2.Location = new System.Drawing.Point(12, 288);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 22);
             this.label2.TabIndex = 3;
             this.label2.Text = "ボディ";
             // 
+            // lblIp
+            // 
+            this.lblIp.AutoSize = true;
+            this.lblIp.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblIp.Location = new System.Drawing.Point(12, 78);
+            this.lblIp.Name = "lblIp";
+            this.lblIp.Size = new System.Drawing.Size(140, 22);
+            this.lblIp.TabIndex = 7;
+            this.lblIp.Text = "IP：192.168.0.0";
+            // 
             // frmLogDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 540);
+            this.ClientSize = new System.Drawing.Size(643, 587);
+            this.Controls.Add(this.lblIp);
             this.Controls.Add(this.txtBody);
             this.Controls.Add(this.lvHeader);
             this.Controls.Add(this.lblMethod);
@@ -192,5 +204,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtBody;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblIp;
     }
 }
