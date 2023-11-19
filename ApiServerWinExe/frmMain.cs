@@ -172,7 +172,7 @@ namespace ApiServerWinExe
         private void LvLog_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ApiLog log = lvLog.SelectedItemsEx<ApiLog>().First().Data;
-            frmLogDetail frmLogDetail = new frmLogDetail(log);
+            FrmLogDetail frmLogDetail = new FrmLogDetail(log);
             frmLogDetail.ShowDialog(this);
         }
 

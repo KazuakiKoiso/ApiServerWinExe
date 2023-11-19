@@ -1,6 +1,6 @@
 ﻿namespace ApiServerWinExe
 {
-    partial class frmLogDetail
+    partial class FrmLogDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -94,7 +94,7 @@
             // 
             // lvHeader
             // 
-            this.lvHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvHeader.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmName,
@@ -133,8 +133,8 @@
             // 
             // txtBody
             // 
-            this.txtBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBody.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtBody.Location = new System.Drawing.Point(16, 314);
@@ -182,7 +182,7 @@
             this.Controls.Add(this.lblDirection);
             this.Controls.Add(this.lblId);
             this.MinimumSize = new System.Drawing.Size(659, 546);
-            this.Name = "frmLogDetail";
+            this.Name = "FrmLogDetail";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ログ詳細";

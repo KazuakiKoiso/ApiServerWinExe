@@ -7,14 +7,14 @@ using Tools.ListView;
 namespace ApiServerWinExe
 {
     /// <summary>ログ詳細画面</summary>
-    public partial class frmLogDetail : Form
+    public partial class FrmLogDetail : Form
     {
         /// <summary>リストビューソート</summary>
         private ListItemSorter _sorter;
 
         /// <summary>コンストラクタ</summary>
         /// <param name="log">ログ</sparam>
-        public frmLogDetail(ApiLog log)
+        public FrmLogDetail(ApiLog log)
         {
             InitializeComponent();
 
