@@ -16,6 +16,7 @@ namespace ApiServerWinExe
         public string Method { get; set; }
         public NameValueCollection Headers { get; set; }
         public string Resource { get; set; }
+        public string Ip { get; set; }
         public string Body { get; set; }
     }
 }

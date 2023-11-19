@@ -26,6 +26,8 @@ namespace ApiServerWinExe
             public string Url { get; set; }
             /// <summary>送受信コンテンツ</summary>
             public string Body { get; set; }
+            /// <summary>送信元IPアドレス</summary>
+            public string Ip { get; set; }
         }
 
         /// <summary>リスナー</summary>
@@ -78,6 +80,7 @@ namespace ApiServerWinExe
                     Headers = request.Headers,
                     Url = "NONE",
                     Body = requestBody,
+                    Ip = request.RemoteEndPoint.Address.ToString(),
                 });
                 result = factory.CreateErrorController(HttpStatusCode.BadRequest);
             }
@@ -90,6 +93,7 @@ namespace ApiServerWinExe
                     Headers = request.Headers,
                     Url = string.Join("/", urlSegments.Skip(1)),
                     Body = requestBody,
+                    Ip = request.RemoteEndPoint.Address.ToString(),
                 });
                 // コントローラを探して実行する
                 ControllerBase controller = ControllerFactory.Instance.CreateController(resourceName);
@@ -141,6 +145,7 @@ namespace ApiServerWinExe
                 Url = string.Join("/", urlSegments.Skip(1)),
                 Headers = response.Headers,
                 Body = responseBody,
+                Ip = request.RemoteEndPoint.Address.ToString(),
             });
         }
 

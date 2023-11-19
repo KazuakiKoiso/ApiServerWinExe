@@ -32,6 +32,7 @@
             this.chkPretty = new System.Windows.Forms.CheckBox();
             this.lvLog = new System.Windows.Forms.ListView();
             this.clmId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmIp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDirection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmMethod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmResource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -78,6 +79,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmId,
+            this.clmIp,
             this.clmDirection,
             this.clmMethod,
             this.clmResource,
@@ -85,7 +87,7 @@
             this.lvLog.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lvLog.FullRowSelect = true;
             this.lvLog.HideSelection = false;
-            this.lvLog.Location = new System.Drawing.Point(16, 104);
+            this.lvLog.Location = new System.Drawing.Point(12, 102);
             this.lvLog.Name = "lvLog";
             this.lvLog.Size = new System.Drawing.Size(853, 334);
             this.lvLog.TabIndex = 8;
@@ -96,7 +98,11 @@
             // clmId
             // 
             this.clmId.Text = "Id";
-            this.clmId.Width = 47;
+            this.clmId.Width = 46;
+            // 
+            // clmIp
+            // 
+            this.clmIp.Text = "Ip";
             // 
             // clmDirection
             // 
@@ -232,6 +238,7 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numPort;
+        private System.Windows.Forms.ColumnHeader clmIp;
     }
 }
 
