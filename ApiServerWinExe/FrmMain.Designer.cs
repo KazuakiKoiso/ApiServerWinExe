@@ -43,6 +43,7 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.chkScroll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,11 +199,23 @@
             0,
             0});
             // 
+            // chkScroll
+            // 
+            this.chkScroll.AutoSize = true;
+            this.chkScroll.Font = new System.Drawing.Font("MS UI Gothic", 16F);
+            this.chkScroll.Location = new System.Drawing.Point(598, 49);
+            this.chkScroll.Name = "chkScroll";
+            this.chkScroll.Size = new System.Drawing.Size(157, 26);
+            this.chkScroll.TabIndex = 9;
+            this.chkScroll.Text = "自動スクロール";
+            this.chkScroll.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 450);
+            this.Controls.Add(this.chkScroll);
             this.Controls.Add(this.numPort);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.label2);
@@ -239,6 +252,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numPort;
         private System.Windows.Forms.ColumnHeader clmIp;
+        private System.Windows.Forms.CheckBox chkScroll;
     }
 }
 
