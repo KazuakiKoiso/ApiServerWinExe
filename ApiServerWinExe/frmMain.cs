@@ -24,6 +24,8 @@ namespace ApiServerWinExe
             _server.OnResponsed += _server_OnResponsed;
 
             clmId.Tag = nameof(ApiLog.Id);
+            clmTime.Tag = (Func<ApiLog, string>)(
+                log => log.Timestamp.ToString("HH:mm:ss"));
             clmIp.Tag = nameof(ApiLog.Ip);
             clmDirection.Tag = (Func<ApiLog, string>)(
                 log => log.Direction == Direction.Received ? "→" : "←");
