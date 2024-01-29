@@ -111,7 +111,7 @@
             // clmIp
             // 
             this.clmIp.Text = "Ip";
-            this.clmIp.Width = 120;
+            this.clmIp.Width = 100;
             // 
             // clmDirection
             // 

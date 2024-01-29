@@ -126,7 +126,7 @@ namespace ApiServerWinExe
                 };
                 lvLog.Items.Add(lvLog.NewItem(log));
                 //自動スクロール
-                LvLog_AutoScroll();
+                AutoScroll();
             });
         }
 
@@ -154,7 +154,7 @@ namespace ApiServerWinExe
 
                 lvLog.Items.Add(lvLog.NewItem(log));
                 //自動スクロール
-                LvLog_AutoScroll();
+                AutoScroll();
             });
         }
 
@@ -182,14 +182,13 @@ namespace ApiServerWinExe
             frmLogDetail.ShowDialog(this);
         }
         /// <summary>リストビューの自動スクロール</summary>
-        private void LvLog_AutoScroll()
+        private void AutoScroll()
         {
             if (chkScroll.Checked)
             {
                 lvLog.SelectedIndices.Clear();
                 lvLog.Items[lvLog.Items.Count - 1].Selected = true;
                 lvLog.EnsureVisible(lvLog.Items.Count - 1);
-                lvLog.Focus();
             }
         }
     }
