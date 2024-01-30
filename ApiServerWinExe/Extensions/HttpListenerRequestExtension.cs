@@ -1,7 +1,6 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Threading.Tasks;
-using System;
-using System.IO;
 
 namespace ApiServerWinExe.Extensions
 {

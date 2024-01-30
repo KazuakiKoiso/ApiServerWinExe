@@ -1,7 +1,6 @@
-﻿using ApiServerWinExe.Controllers;
+﻿using System.Reflection;
+using ApiServerWinExe.Controllers;
 using ApiServerWinExe.Controllers.Attributes;
-using System;
-using System.Reflection;
 
 namespace ApiServerWinExe.Extensions
 {
