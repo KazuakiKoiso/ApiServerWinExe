@@ -9,13 +9,14 @@ namespace ApiServerWinExe.Controllers.Error
     [ErrorController(HttpStatusCode.NotAcceptable)]
     public class NotAcceptableErrorController : ErrorController
     {
+        /// <summary>ステータスコード</summary>
         public override HttpStatusCode StatusCode => HttpStatusCode.NotAcceptable;
 
         /// <summary>エラーレスポンス処理</summary>
         /// <param name="requestHeaders">リクエストヘッダ</param>
         /// <param name="urlSegments">リクエストURL</param>
         /// <param name="requestBody">リクエストボディ</param>
-        /// <returns></returns>
+        /// <returns>エラーオブジェクト</returns>
         public override dynamic OnError(NameValueCollection requestHeaders, string[] urlSegments, string requestBody)
             => new ErrorResult()
             {

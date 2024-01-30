@@ -11,6 +11,10 @@ namespace ApiServerWinExe.Controllers.Normal
     [Controller("Heavy")]
     public class HeavyController : ControllerBase, IAsyncRead
     {
+        /// <summary>Get</summary>
+        /// <param name="headers">リクエストヘッダ</param>
+        /// <param name="urlSegments">URL</param>
+        /// <returns>処理結果</returns>
         public async Task<dynamic> ReadAsync(NameValueCollection headers, string[] urlSegments)
         {
             var delayTime = urlSegments.FirstOrDefault();

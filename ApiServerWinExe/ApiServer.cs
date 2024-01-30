@@ -20,18 +20,23 @@ namespace ApiServerWinExe
         {
             /// <summary>リクエストメソッド</summary>
             public string Method { get; set; }
+
             /// <summary>送受信時のヘッダ</summary>
             public NameValueCollection Headers { get; set; }
+
             /// <summary>リクエスト時のURL</summary>
             public string Url { get; set; }
+
             /// <summary>送受信コンテンツ</summary>
             public string Body { get; set; }
+
             /// <summary>送信元IPアドレス</summary>
             public string Ip { get; set; }
         }
 
         /// <summary>リスナー</summary>
         protected LocalHttpListener _listener = new LocalHttpListener();
+
         /// <summary>Json設定</summary>
         protected JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings()
         {
@@ -41,8 +46,10 @@ namespace ApiServerWinExe
 
         /// <summary>Json変換時、インデントを使う</summary>
         public bool PrettyResponse { get; set; } = true;
+
         /// <summary>受信イベント</summary>
         public event EventHandler<ServerEventArgs> OnRequested;
+
         /// <summary>応答イベント</summary>
         public event EventHandler<ServerEventArgs> OnResponsed;
 
@@ -213,11 +220,11 @@ namespace ApiServerWinExe
         }
 
         /// <summary>Create</summary>
-        /// <param name="requestHeaders"></param>
-        /// <param name="urlSegments"></param>
-        /// <param name="requestBody"></param>
-        /// <param name="controller"></param>
-        /// <returns></returns>
+        /// <param name="requestHeaders">リクエストヘッダ</param>
+        /// <param name="urlSegments">URL</param>
+        /// <param name="requestBody">リクエストボディ</param>
+        /// <param name="controller">コントローラ</param>
+        /// <returns>処理結果</returns>
 #pragma warning disable IDE0060        
         private async Task<dynamic> OnPostCreateReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
 #pragma warning restore IDE0060        

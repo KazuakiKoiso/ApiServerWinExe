@@ -8,6 +8,12 @@ namespace ApiServerWinExe.Controllers.Error
     {
         /// <summary>ステータスコード</summary>
         public abstract HttpStatusCode StatusCode { get; }
+
+        /// <summary>エラーレスポンス処理</summary>
+        /// <param name="requestHeaders">リクエストヘッダ</param>
+        /// <param name="urlSegments">リクエストURL</param>
+        /// <param name="requestBody">リクエストボディ</param>
+        /// <returns>エラーオブジェクト</returns>
         public abstract dynamic OnError(NameValueCollection requestHeaders, string[] urlSegments, string requestBody);
     }
 }

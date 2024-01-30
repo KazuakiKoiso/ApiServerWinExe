@@ -10,12 +10,14 @@ namespace ApiServerWinExe.Controllers.Error
     /// </summary>
     class CustomErrorController : ErrorController
     {
+        /// <summary>ステータスコード</summary>
         public override HttpStatusCode StatusCode => HttpStatusCode.InternalServerError;
 
+        /// <summary>エラーメッセージ</summary>
         private readonly string _message;
 
-        /// <summary>コンストラクタで</summary>
-        /// <param name="message"></param>
+        /// <summary>コンストラクタ</summary>
+        /// <param name="message">エラーメッセージ</param>
         public CustomErrorController(string message)
         {
             _message = message;
@@ -25,7 +27,7 @@ namespace ApiServerWinExe.Controllers.Error
         /// <param name="requestHeaders">リクエストヘッダ</param>
         /// <param name="urlSegments">リクエストURL</param>
         /// <param name="requestBody">リクエストボディ</param>
-        /// <returns></returns>
+        /// <returns>エラーオブジェクト</returns>
         public override dynamic OnError(NameValueCollection requestHeaders, string[] urlSegments, string requestBody)
             => new ErrorResult()
             {

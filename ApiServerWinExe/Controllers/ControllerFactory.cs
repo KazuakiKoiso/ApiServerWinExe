@@ -11,12 +11,15 @@ namespace ApiServerWinExe.Controllers
     /// <summary>コントローラオブジェクトのファクトリ</summary>
     public class ControllerFactory
     {
-        // シングルトン
+        /// <summary>シングルトンインスタンス</summary>
         private static readonly Lazy<ControllerFactory> _instance = new Lazy<ControllerFactory>(() => new ControllerFactory());
+
+        /// <summary>シングルトンインスタンス</summary>
         public static ControllerFactory Instance => _instance.Value;
 
         /// <summary>コントローラの型情報</summary>
         private readonly Dictionary<string, Type> _controllers;
+
         /// <summary>エラー時コントローラの型情報</summary>
         private readonly Dictionary<HttpStatusCode, Type> _errorControllers;
 

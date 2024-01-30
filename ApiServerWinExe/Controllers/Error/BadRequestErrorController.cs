@@ -9,6 +9,7 @@ namespace ApiServerWinExe.Controllers.Error
     [ErrorController(HttpStatusCode.BadRequest)]
     public class BadRequestErrorController : ErrorController
     {
+        /// <summary>ステータスコード</summary>
         public override HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
 
         /// <summary>エラーレスポンス処理</summary>

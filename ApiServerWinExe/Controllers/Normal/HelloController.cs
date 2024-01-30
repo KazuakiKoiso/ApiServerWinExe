@@ -10,6 +10,10 @@ namespace ApiServerWinExe.Controllers.Normal
     [Controller("Hello")]
     public class HelloController : ControllerBase, IRead
     {
+        /// <summary>Get</summary>
+        /// <param name="headers">リクエストヘッダ</param>
+        /// <param name="urlSegments">URL</param>
+        /// <returns>処理結果</returns>
         public dynamic Read(NameValueCollection headers, string[] urlSegments)
         {
             var name = urlSegments.FirstOrDefault();
