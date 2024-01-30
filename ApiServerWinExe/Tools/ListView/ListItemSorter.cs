@@ -17,6 +17,7 @@ namespace Tools.ListView
     public class ListItemSorter : IComparer
     {
         #region Win32API定義
+#pragma warning disable IDE0051
         [StructLayout(LayoutKind.Sequential)]
         private struct HDITEM
         {
@@ -41,6 +42,7 @@ namespace Tools.ListView
         private const Int32 LVM_GETHEADER = 0x1000 + 31;  // LVM_FIRST + 31
         private const Int32 HDM_GETITEM = 0x1200 + 11;  // HDM_FIRST + 11
         private const Int32 HDM_SETITEM = 0x1200 + 12;  // HDM_FIRST + 12
+#pragma warning restore IDE0051
 
         /// <summary>ウィンドウメッセージ送信</summary>
         /// <param name="Handle">ウィンドウハンドル</param>
@@ -65,7 +67,7 @@ namespace Tools.ListView
         /// <summary>現在ソートしている列</summary>
         private int _Column = -1;
         /// <summary>ソート管理対象のリストビュー</summary>
-        private System.Windows.Forms.ListView Target = null;
+        private readonly System.Windows.Forms.ListView Target = null;
 
         /// <summary>現在ソートしている列</summary>
         public int Column
@@ -75,7 +77,7 @@ namespace Tools.ListView
             {
                 PrevColumn = _Column;
                 _Column = value;
-                Ascending = (PrevColumn == Column) ? !Ascending : true;
+                Ascending = PrevColumn != Column || !Ascending;
             }
         }
         /// <summary>昇順/降順</summary>
@@ -134,17 +136,9 @@ namespace Tools.ListView
         public int Compare(object x, object y)
         {
             // 比較
-            ListViewItem itemX = x as ListViewItem;
-            ListViewItem itemY = y as ListViewItem;
-            int result = 0;
-            if (Comparer.ContainsKey(Column))
-            {
-                result = Comparer[Column](Column, itemX, itemY);
-            }
-            else
-            {
-                result = CompareString(Column, itemX, itemY);
-            }
+            var itemX = x as ListViewItem;
+            var itemY = y as ListViewItem;
+            var result = Comparer.ContainsKey(Column) ? Comparer[Column](Column, itemX, itemY) : CompareString(Column, itemX, itemY);
 
             // 昇順/降順
             result *= Ascending ? 1 : -1;
@@ -159,8 +153,8 @@ namespace Tools.ListView
         /// <returns>比較結果</returns>
         public static int CompareString(int idx, object x, object y)
         {
-            ListViewItem itemX = x as ListViewItem;
-            ListViewItem itemY = y as ListViewItem;
+            var itemX = x as ListViewItem;
+            var itemY = y as ListViewItem;
             return string.Compare(itemX.SubItems[idx].Text, itemY.SubItems[idx].Text);
         }
 
@@ -171,10 +165,10 @@ namespace Tools.ListView
         /// <returns>比較結果</returns>
         public static int CompareInt(int idx, object x, object y)
         {
-            ListViewItem itemX = x as ListViewItem;
-            ListViewItem itemY = y as ListViewItem;
-            int intX = int.Parse(itemX.SubItems[idx].Text);
-            int intY = int.Parse(itemY.SubItems[idx].Text);
+            var itemX = x as ListViewItem;
+            var itemY = y as ListViewItem;
+            var intX = int.Parse(itemX.SubItems[idx].Text);
+            var intY = int.Parse(itemY.SubItems[idx].Text);
             return intX - intY;
         }
 
@@ -185,10 +179,10 @@ namespace Tools.ListView
         /// <returns>比較結果</returns>
         public static int CompareDate(int idx, object x, object y)
         {
-            ListViewItem itemX = x as ListViewItem;
-            ListViewItem itemY = y as ListViewItem;
-            DateTime timeX = DateTime.Parse(itemX.SubItems[idx].Text);
-            DateTime timeY = DateTime.Parse(itemY.SubItems[idx].Text);
+            var itemX = x as ListViewItem;
+            var itemY = y as ListViewItem;
+            var timeX = DateTime.Parse(itemX.SubItems[idx].Text);
+            var timeY = DateTime.Parse(itemY.SubItems[idx].Text);
 
             return DateTime.Compare(timeX, timeY);
         }
@@ -198,9 +192,9 @@ namespace Tools.ListView
         /// <param name="order">ソート設定</param>
         private void SetMark(int idx, SortOrder order)
         {
-            IntPtr hColHeader = SendMessage(Target.Handle, LVM_GETHEADER, 0, 0);
-            HDITEM hdItem = new HDITEM();
-            IntPtr colHeader = new IntPtr(idx);
+            var hColHeader = SendMessage(Target.Handle, LVM_GETHEADER, 0, 0);
+            var hdItem = new HDITEM();
+            var colHeader = new IntPtr(idx);
 
             hdItem.mask = HDI_FORMAT;
             SendMessageITEM(hColHeader, HDM_GETITEM, colHeader, ref hdItem);

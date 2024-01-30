@@ -7,7 +7,7 @@ namespace ApiServerWinExe.Controllers
     public class ControllerBase
     {
         /// <summary>レスポンスヘッダーを設定する</summary>
-        /// <param name="response"></param>
+        /// <param name="headers">リクエストヘッダ</param>
         public virtual void SetResponseHeaders(WebHeaderCollection headers)
         {
             if (!headers.AllKeys.Contains("Content-Type"))

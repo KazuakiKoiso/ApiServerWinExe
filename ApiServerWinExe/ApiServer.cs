@@ -1,14 +1,14 @@
-﻿using ApiServerWinExe.Controllers;
-using ApiServerWinExe.Controllers.Error;
-using ApiServerWinExe.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ApiServerWinExe.Controllers;
+using ApiServerWinExe.Controllers.Error;
+using ApiServerWinExe.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ApiServerWinExe
 {
@@ -20,18 +20,23 @@ namespace ApiServerWinExe
         {
             /// <summary>リクエストメソッド</summary>
             public string Method { get; set; }
+
             /// <summary>送受信時のヘッダ</summary>
             public NameValueCollection Headers { get; set; }
+
             /// <summary>リクエスト時のURL</summary>
             public string Url { get; set; }
+
             /// <summary>送受信コンテンツ</summary>
             public string Body { get; set; }
+
             /// <summary>送信元IPアドレス</summary>
             public string Ip { get; set; }
         }
 
         /// <summary>リスナー</summary>
         protected LocalHttpListener _listener = new LocalHttpListener();
+
         /// <summary>Json設定</summary>
         protected JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings()
         {
@@ -41,15 +46,17 @@ namespace ApiServerWinExe
 
         /// <summary>Json変換時、インデントを使う</summary>
         public bool PrettyResponse { get; set; } = true;
+
         /// <summary>受信イベント</summary>
         public event EventHandler<ServerEventArgs> OnRequested;
+
         /// <summary>応答イベント</summary>
         public event EventHandler<ServerEventArgs> OnResponsed;
 
         /// <summary>コンストラクタ</summary>
         public ApiServer()
         {
-            _listener.OnReceived += _listener_OnReceived;
+            _listener.OnReceived += Listener_OnReceived;
         }
 
         /// <summary>Listen開始</summary>
@@ -63,12 +70,12 @@ namespace ApiServerWinExe
         /// <summary>受信イベント</summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
-        private async Task _listener_OnReceived(HttpListenerRequest request, HttpListenerResponse response)
+        private async Task Listener_OnReceived(HttpListenerRequest request, HttpListenerResponse response)
         {
-            ControllerFactory factory = ControllerFactory.Instance;
-            string[] urlSegments = request.Url.Segments.Select(s => s.TrimEnd('/')).ToArray();
-            string requestBody = await request.GetRequestBodyAsync();
-            string resourceName = string.Empty;
+            var factory = ControllerFactory.Instance;
+            var urlSegments = request.Url.Segments.Select(s => s.TrimEnd('/')).ToArray();
+            var requestBody = await request.GetRequestBodyAsync();
+            var resourceName = string.Empty;
             dynamic result = null;
 
             // リクエストがhttp://localhost/Temprary_Listen_Addressesで終わっている場合はエラーとする
@@ -96,7 +103,7 @@ namespace ApiServerWinExe
                     Ip = request.RemoteEndPoint.Address.ToString(),
                 });
                 // コントローラを探して実行する
-                ControllerBase controller = ControllerFactory.Instance.CreateController(resourceName);
+                var controller = ControllerFactory.Instance.CreateController(resourceName);
                 if (controller != null)
                 {
                     controller.SetResponseHeaders(response.Headers);
@@ -188,7 +195,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private Task<dynamic> OnPostReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string method = urlSegments.Skip(2).FirstOrDefault();
+            var method = urlSegments.Skip(2).FirstOrDefault();
             try
             {
                 var parameters = urlSegments.Skip(2).ToArray();
@@ -213,12 +220,14 @@ namespace ApiServerWinExe
         }
 
         /// <summary>Create</summary>
-        /// <param name="requestHeaders"></param>
-        /// <param name="urlSegments"></param>
-        /// <param name="requestBody"></param>
-        /// <param name="controller"></param>
-        /// <returns></returns>
+        /// <param name="requestHeaders">リクエストヘッダ</param>
+        /// <param name="urlSegments">URL</param>
+        /// <param name="requestBody">リクエストボディ</param>
+        /// <param name="controller">コントローラ</param>
+        /// <returns>処理結果</returns>
+#pragma warning disable IDE0060        
         private async Task<dynamic> OnPostCreateReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
+#pragma warning restore IDE0060        
         {
             if (controller is IAsyncCreate asyncCreate)
             {
@@ -240,7 +249,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private async Task<dynamic> OnPostUpdateReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string id = urlSegments.ElementAtOrDefault(1);
+            var id = urlSegments.ElementAtOrDefault(1);
             if (controller is IAsyncUpdate asyncUpdate)
             {
                 return await asyncUpdate.UpdateAsync(requestHeaders, requestBody, id);
@@ -261,7 +270,7 @@ namespace ApiServerWinExe
         /// <returns></returns>
         private async Task<dynamic> OnPostDeleteReceivedAsync(NameValueCollection requestHeaders, string[] urlSegments, string requestBody, ControllerBase controller)
         {
-            string id = urlSegments.ElementAtOrDefault(1);
+            var id = urlSegments.ElementAtOrDefault(1);
             if (controller is IAsyncDelete asyncDelete)
             {
                 return await asyncDelete.DeleteAsync(requestHeaders, requestBody, id);

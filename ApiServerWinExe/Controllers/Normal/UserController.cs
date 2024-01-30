@@ -1,11 +1,11 @@
-﻿using ApiServerWinExe.Controllers.Attributes;
+﻿using System.Collections.Specialized;
+using System.Linq;
+using ApiServerWinExe.Controllers.Attributes;
 using ApiServerWinExe.Controllers.Error;
 using ApiServerWinExe.Extensions;
 using ApiServerWinExe.Models;
 using ApiServerWinExe.Users;
 using Newtonsoft.Json;
-using System.Collections.Specialized;
-using System.Linq;
 
 namespace ApiServerWinExe.Controllers.Normal
 {
@@ -16,7 +16,7 @@ namespace ApiServerWinExe.Controllers.Normal
         /// <summary>ユーザ登録</summary>
         /// <param name="headers"></param>
         /// <param name="requestBody"></param>
-        /// <returns></returns>
+        /// <returns>処理結果</returns>
         public dynamic Create(NameValueCollection headers, string requestBody)
         {
             var info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
@@ -45,9 +45,9 @@ namespace ApiServerWinExe.Controllers.Normal
         }
 
         /// <summary>ユーザ取得</summary>
-        /// <param name="headers"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="headers">リクエストヘッダ</param>
+        /// <param name="urlSegments">URL</param>
+        /// <returns>処理結果</returns>
         public dynamic Read(NameValueCollection headers, string[] urlSegments)
         {
             var id = urlSegments.FirstOrDefault();
@@ -73,10 +73,10 @@ namespace ApiServerWinExe.Controllers.Normal
         }
 
         /// <summary>ユーザ削除</summary>
-        /// <param name="headers"></param>
-        /// <param name="requestBody"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="headers">リクエストヘッダ</param>
+        /// <param name="requestBody">リクエストボディ</param>
+        /// <param name="id">ユーザID</param>
+        /// <returns>処理結果</returns>
         public dynamic Update(NameValueCollection headers, string requestBody, string id)
         {
             var info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
@@ -101,11 +101,10 @@ namespace ApiServerWinExe.Controllers.Normal
             return updateUser;
         }
 
-        /// <summary>ユーザ削除</summary>
-        /// <param name="headers"></param>
-        /// <param name="requestBody"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="headers">リクエストヘッダ</param>
+        /// <param name="requestBody">リクエストボディ</param>
+        /// <param name="id">ユーザID</param>
+        /// <returns>処理結果</returns>
         public dynamic Delete(NameValueCollection headers, string requestBody, string id)
         {
             if (!id.IsNumeric())
