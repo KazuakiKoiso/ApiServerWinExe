@@ -24,6 +24,8 @@ namespace ApiServerWinExe
             _server.OnResponsed += _server_OnResponsed;
 
             clmId.Tag = nameof(ApiLog.Id);
+            clmTime.Tag = (Func<ApiLog, string>)(
+                log => log.Timestamp.ToString("HH:mm:ss"));
             clmIp.Tag = nameof(ApiLog.Ip);
             clmDirection.Tag = (Func<ApiLog, string>)(
                 log => log.Direction == Direction.Received ? "→" : "←");
@@ -123,6 +125,8 @@ namespace ApiServerWinExe
                     Body = notPrettyJson,
                 };
                 lvLog.Items.Add(lvLog.NewItem(log));
+                //自動スクロール
+                AutoScroll();
             });
         }
 
@@ -149,6 +153,8 @@ namespace ApiServerWinExe
                 };
 
                 lvLog.Items.Add(lvLog.NewItem(log));
+                //自動スクロール
+                AutoScroll();
             });
         }
 
@@ -175,6 +181,15 @@ namespace ApiServerWinExe
             FrmLogDetail frmLogDetail = new FrmLogDetail(log);
             frmLogDetail.ShowDialog(this);
         }
-
+        /// <summary>リストビューの自動スクロール</summary>
+        private void AutoScroll()
+        {
+            if (chkScroll.Checked)
+            {
+                lvLog.SelectedIndices.Clear();
+                lvLog.Items[lvLog.Items.Count - 1].Selected = true;
+                lvLog.EnsureVisible(lvLog.Items.Count - 1);
+            }
+        }
     }
 }
