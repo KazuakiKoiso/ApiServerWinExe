@@ -94,7 +94,7 @@
     <Compile Include="LocalHttpListener.cs" />
     <Compile Include="Models\ErrorResult.cs" />
     <Compile Include="Models\UserInfo.cs" />
-    <Compile Include="MonitorChanged.cs" />
+    <Compile Include="ValueHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\ListView\ListItemSorter.cs" />
