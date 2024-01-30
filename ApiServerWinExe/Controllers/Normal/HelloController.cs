@@ -13,14 +13,7 @@ namespace ApiServerWinExe.Controllers.Normal
         public dynamic Read(NameValueCollection headers, string[] urlSegments)
         {
             var name = urlSegments.FirstOrDefault();
-            if (string.IsNullOrEmpty(name))
-            {
-                return new { Message = "こんにちは！" };
-            }
-            else
-            {
-                return new { Message = $"こんにちは！{name}さん！" };
-            }
+            return string.IsNullOrEmpty(name) ? (new { Message = "こんにちは！" }) : (dynamic)(new { Message = $"こんにちは！{name}さん！" });
         }
     }
 }

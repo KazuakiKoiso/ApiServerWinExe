@@ -9,7 +9,7 @@ namespace ApiServerWinExe.Extensions
     {
         public static async Task<string> GetRequestBodyAsync(this HttpListenerRequest @this)
         {
-            using (StreamReader sr = new StreamReader(@this.InputStream))
+            using (var sr = new StreamReader(@this.InputStream))
             {
                 return await sr.ReadToEndAsync();
             }
@@ -17,7 +17,7 @@ namespace ApiServerWinExe.Extensions
 
         public static string GetRequestBody(this HttpListenerRequest @this)
         {
-            using (StreamReader sr = new StreamReader(@this.InputStream))
+            using (var sr = new StreamReader(@this.InputStream))
             {
                 return sr.ReadToEnd();
             }

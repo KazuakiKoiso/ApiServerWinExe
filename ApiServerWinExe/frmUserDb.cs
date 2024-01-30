@@ -10,8 +10,10 @@ namespace ApiServerWinExe
     /// <summary>ユーザ情報DBの内容を表示する画面</summary>
     public partial class FrmUserDb : Form
     {
+#pragma warning disable IDE0052
         /// <summary>リストビューソート</summary>
-        private ListItemSorter _sorter = null;
+        private readonly ListItemSorter _sorter = null;
+#pragma warning restore IDE0052
 
         /// <summary>コンストラクタ</summary>
         public FrmUserDb()

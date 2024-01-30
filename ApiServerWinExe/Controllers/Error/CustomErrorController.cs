@@ -11,7 +11,8 @@ namespace ApiServerWinExe.Controllers.Error
     class CustomErrorController : ErrorController
     {
         public override HttpStatusCode StatusCode => HttpStatusCode.InternalServerError;
-        private string _message;
+
+        private readonly string _message;
 
         /// <summary>コンストラクタで</summary>
         /// <param name="message"></param>

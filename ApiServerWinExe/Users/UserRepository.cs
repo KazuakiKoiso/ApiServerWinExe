@@ -8,11 +8,11 @@ namespace ApiServerWinExe.Users
     public class UserRepository
     {
         // シングルトン
-        private static Lazy<UserRepository> _instance = new Lazy<UserRepository>(() => new UserRepository());
+        private static readonly Lazy<UserRepository> _instance = new Lazy<UserRepository>(() => new UserRepository());
         public static UserRepository Instance => _instance.Value;
 
         /// <summary>データベース本体</summary>
-        private List<UserData> _users = new List<UserData>();
+        private readonly List<UserData> _users = new List<UserData>();
 
         /// <summary>コンストラクタ</summary>
         private UserRepository()
@@ -41,7 +41,7 @@ namespace ApiServerWinExe.Users
             {
                 throw new UserNotExistException(userId);
             }
-            UserData user = _users.First(u => u.Id == userId);
+            var user = _users.First(u => u.Id == userId);
 
             // コピーを返すことでReadOnly的なものを実現
             return new UserData()
@@ -70,7 +70,7 @@ namespace ApiServerWinExe.Users
             {
                 throw new UserNotExistException(user.Id);
             }
-            UserData record = _users.First(u => u.Id == user.Id);
+            var record = _users.First(u => u.Id == user.Id);
             record.Name = user.Name;
             record.Mail = user.Mail;
         }

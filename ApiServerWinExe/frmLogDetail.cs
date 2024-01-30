@@ -9,8 +9,10 @@ namespace ApiServerWinExe
     /// <summary>ログ詳細画面</summary>
     public partial class FrmLogDetail : Form
     {
+#pragma warning disable IDE0052
         /// <summary>リストビューソート</summary>
-        private ListItemSorter _sorter;
+        private readonly ListItemSorter _sorter;
+#pragma warning restore IDE0052
 
         /// <summary>コンストラクタ</summary>
         /// <param name="log">ログ</sparam>
@@ -19,7 +21,7 @@ namespace ApiServerWinExe
             InitializeComponent();
 
             lblId.Text = $"ログID：{log.Id}";
-            lblTimestamp.Text = $"日時：{log.Timestamp.ToString("yyyy/MM/dd HH:mm:ss")}";
+            lblTimestamp.Text = $"日時：{log.Timestamp:yyyy/MM/dd HH:mm:ss}";
             lblDirection.Text = $"方向：{(log.Direction == Direction.Received ? "受信" : "返信")}";
             lblMethod.Text = $"HTTPメソッド：{log.Method}";
             lblResource.Text = $"対象リソース：{log.Resource}";
