@@ -126,7 +126,7 @@ namespace ApiServerWinExe
                 };
                 lvLog.Items.Add(lvLog.NewItem(log));
                 //自動スクロール
-                AutoScroll();
+                AutoScrollLog();
             });
         }
 
@@ -154,7 +154,7 @@ namespace ApiServerWinExe
 
                 lvLog.Items.Add(lvLog.NewItem(log));
                 //自動スクロール
-                AutoScroll();
+                AutoScrollLog();
             });
         }
 
@@ -181,8 +181,9 @@ namespace ApiServerWinExe
             FrmLogDetail frmLogDetail = new FrmLogDetail(log);
             frmLogDetail.ShowDialog(this);
         }
+
         /// <summary>リストビューの自動スクロール</summary>
-        private void AutoScroll()
+        private void AutoScrollLog()
         {
             if (chkScroll.Checked)
             {
