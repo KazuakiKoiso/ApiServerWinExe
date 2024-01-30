@@ -7,21 +7,31 @@ using Tools.ListView;
 
 namespace ApiServerWinExe
 {
+    /// <summary>メイン画面</summary>
     public partial class FrmMain : Form
     {
-        private MonitorChanged<bool> _powerOn = new MonitorChanged<bool>(false);
-        private ApiServer _server = new ApiServer();
+        /// <summary>リッスン状態</summary>
+        private readonly MonitorChanged<bool> _powerOn = new MonitorChanged<bool>(false);
+
+        /// <summary>APIサーバ</summary>
+        private readonly ApiServer _server = new ApiServer();
+
+        /// <summary>ユーザDBダイアログ</summary>
         private FrmUserDb _frmUserDb;
-        private ListItemSorter _sorter;
+
+#pragma warning disable IDE0052
+        /// <summary>リストビューのソート制御</summary>
+        private readonly ListItemSorter _sorter;
+#pragma warning restore IDE0052
 
         /// <summary>コンストラクタ</summary>
         public FrmMain()
         {
             InitializeComponent();
-            _powerOn.OnChanged += _powerOn_OnChanged;
+            _powerOn.OnChanged += PowerOn_OnChanged;
             _server.PrettyResponse = chkPretty.Checked;
-            _server.OnRequested += _server_OnRequested;
-            _server.OnResponsed += _server_OnResponsed;
+            _server.OnRequested += Server_OnRequested;
+            _server.OnResponsed += Server_OnResponsed;
 
             clmId.Tag = nameof(ApiLog.Id);
             clmTime.Tag = (Func<ApiLog, string>)(
@@ -78,7 +88,7 @@ namespace ApiServerWinExe
         /// <summary>電源状態変更</summary>
         /// <param name="before"></param>
         /// <param name="after"></param>
-        private void _powerOn_OnChanged(bool before, bool after)
+        private void PowerOn_OnChanged(bool before, bool after)
         {
             btnPower.Text = after ? "受信中" : "停止中";
             btnPower.BackColor = after ? Color.Lime : Color.Red;
@@ -106,14 +116,14 @@ namespace ApiServerWinExe
         /// <summary>受信イベント</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _server_OnRequested(object sender, ApiServer.ServerEventArgs e)
+        private void Server_OnRequested(object sender, ApiServer.ServerEventArgs e)
         {
             AutoInvoke(() =>
             {
                 // Prettyの場合でもログ出力用に強制的にPretty解除する
                 var notPrettyObject = JsonConvert.DeserializeObject(e.Body);
-                string notPrettyJson = JsonConvert.SerializeObject(notPrettyObject);
-                ApiLog log = new ApiLog()
+                var notPrettyJson = JsonConvert.SerializeObject(notPrettyObject);
+                var log = new ApiLog()
                 {
                     Id = lvLog.ItemsEx<ApiLog>().Count() + 1,
                     Ip = e.Ip,
@@ -133,14 +143,14 @@ namespace ApiServerWinExe
         /// <summary>応答イベント</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _server_OnResponsed(object sender, ApiServer.ServerEventArgs e)
+        private void Server_OnResponsed(object sender, ApiServer.ServerEventArgs e)
         {
             AutoInvoke(() =>
             {
                 // Prettyの場合でもログ出力用に強制的にPretty解除する
                 var notPrettyObject = JsonConvert.DeserializeObject(e.Body);
-                string notPrettyJson = JsonConvert.SerializeObject(notPrettyObject);
-                ApiLog log = new ApiLog()
+                var notPrettyJson = JsonConvert.SerializeObject(notPrettyObject);
+                var log = new ApiLog()
                 {
                     Id = lvLog.ItemsEx<ApiLog>().Count() + 1,
                     Ip= e.Ip,
@@ -177,8 +187,8 @@ namespace ApiServerWinExe
         /// <param name="e"></param>
         private void LvLog_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ApiLog log = lvLog.SelectedItemsEx<ApiLog>().First().Data;
-            FrmLogDetail frmLogDetail = new FrmLogDetail(log);
+            var log = lvLog.SelectedItemsEx<ApiLog>().First().Data;
+            var frmLogDetail = new FrmLogDetail(log);
             frmLogDetail.ShowDialog(this);
         }
 

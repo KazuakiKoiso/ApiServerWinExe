@@ -19,7 +19,7 @@ namespace ApiServerWinExe.Controllers.Normal
         /// <returns></returns>
         public dynamic Create(NameValueCollection headers, string requestBody)
         {
-            UserInfo info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
+            var info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
             if (!info.Id.HasValue ||
                 string.IsNullOrEmpty(info.Name) ||
                 string.IsNullOrEmpty(info.Mail))
@@ -27,7 +27,7 @@ namespace ApiServerWinExe.Controllers.Normal
                 return new BadRequestErrorController();
             }
 
-            UserData newUser = new UserData()
+            var newUser = new UserData()
             {
                 Id = info.Id.Value,
                 Name = info.Name,
@@ -79,12 +79,12 @@ namespace ApiServerWinExe.Controllers.Normal
         /// <returns></returns>
         public dynamic Update(NameValueCollection headers, string requestBody, string id)
         {
-            UserInfo info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
+            var info = JsonConvert.DeserializeObject<UserInfo>(requestBody);
             if (!id.IsNumeric() || string.IsNullOrEmpty(info.Name) || string.IsNullOrEmpty(info.Mail))
             {
                 return new BadRequestErrorController();
             }
-            UserData updateUser = new UserData()
+            var updateUser = new UserData()
             {
                 Id = int.Parse(id),
                 Name = info.Name,
