@@ -32,7 +32,6 @@
             this.clmId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmMail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvDb
@@ -49,7 +48,7 @@
             this.lvDb.HideSelection = false;
             this.lvDb.Location = new System.Drawing.Point(12, 12);
             this.lvDb.Name = "lvDb";
-            this.lvDb.Size = new System.Drawing.Size(454, 170);
+            this.lvDb.Size = new System.Drawing.Size(613, 281);
             this.lvDb.TabIndex = 0;
             this.lvDb.UseCompatibleStateImageBehavior = false;
             this.lvDb.View = System.Windows.Forms.View.Details;
@@ -71,28 +70,18 @@
             this.clmMail.Text = "Mail";
             this.clmMail.Width = 216;
             // 
-            // btnUpdate
+            // FrmUserDb
             // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(352, 188);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(114, 47);
-            this.btnUpdate.TabIndex = 1;
-            this.btnUpdate.Text = "更新";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
-            // 
-            // frmUserDb
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 247);
-            this.Controls.Add(this.btnUpdate);
+            this.ClientSize = new System.Drawing.Size(637, 309);
             this.Controls.Add(this.lvDb);
-            this.Name = "frmUserDb";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FrmUserDb";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ユーザDB";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmUserDb_FormClosing);
             this.ResumeLayout(false);
 
         }
@@ -103,6 +92,5 @@
         private System.Windows.Forms.ColumnHeader clmId;
         private System.Windows.Forms.ColumnHeader clmName;
         private System.Windows.Forms.ColumnHeader clmMail;
-        private System.Windows.Forms.Button btnUpdate;
     }
 }
