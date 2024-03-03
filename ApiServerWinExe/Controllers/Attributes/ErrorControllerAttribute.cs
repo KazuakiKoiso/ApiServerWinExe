@@ -9,6 +9,9 @@ namespace ApiServerWinExe.Controllers.Attributes
     {
         /// <summary>Httpコード</summary>
         public HttpStatusCode StatusCode { get; }
+
+        /// <summary>コンストラクタ</summary>
+        /// <param name="statusCode">ステータスコード</param>
         public ErrorControllerAttribute(HttpStatusCode statusCode)
         {
             StatusCode = statusCode;

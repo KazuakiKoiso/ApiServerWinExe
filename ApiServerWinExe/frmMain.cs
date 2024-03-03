@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Tools.ListView;
 
 namespace ApiServerWinExe
@@ -11,7 +11,7 @@ namespace ApiServerWinExe
     public partial class FrmMain : Form
     {
         /// <summary>リッスン状態</summary>
-        private readonly MonitorChanged<bool> _powerOn = new MonitorChanged<bool>(false);
+        private readonly ValueHandler<bool> _powerOn = new ValueHandler<bool>(false);
 
         /// <summary>APIサーバ</summary>
         private readonly ApiServer _server = new ApiServer();

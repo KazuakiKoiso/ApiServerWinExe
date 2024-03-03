@@ -3,11 +3,10 @@ using System.Windows.Forms;
 
 namespace ApiServerWinExe
 {
+    /// <summary>プログラム本体</summary>
     static class Program
     {
-        /// <summary>
-        /// アプリケーションのメイン エントリ ポイントです。
-        /// </summary>
+        /// <summary>アプリケーションのメイン エントリ ポイントです。</summary>
         [STAThread]
         static void Main()
         {

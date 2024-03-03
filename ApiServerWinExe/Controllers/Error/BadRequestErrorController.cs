@@ -1,7 +1,7 @@
-﻿using ApiServerWinExe.Controllers.Attributes;
-using ApiServerWinExe.Models;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Net;
+using ApiServerWinExe.Controllers.Attributes;
+using ApiServerWinExe.Models;
 
 namespace ApiServerWinExe.Controllers.Error
 {
@@ -9,6 +9,7 @@ namespace ApiServerWinExe.Controllers.Error
     [ErrorController(HttpStatusCode.BadRequest)]
     public class BadRequestErrorController : ErrorController
     {
+        /// <summary>ステータスコード</summary>
         public override HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
 
         /// <summary>エラーレスポンス処理</summary>

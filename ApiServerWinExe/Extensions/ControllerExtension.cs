@@ -1,17 +1,16 @@
-﻿using ApiServerWinExe.Controllers;
+﻿using System.Reflection;
+using ApiServerWinExe.Controllers;
 using ApiServerWinExe.Controllers.Attributes;
-using System;
-using System.Reflection;
 
 namespace ApiServerWinExe.Extensions
 {
+    /// <summary>コントローラの拡張メソッド</summary>
     public static class ControllerExtension
     {
+        /// <summary>リソース名を取得する</summary>
+        /// <param name="this">コントローラ</param>
+        /// <returns>リソース名</returns>
         public static string GetResourceName(this ControllerBase @this)
-        {
-            Type t = @this.GetType();
-            ControllerAttribute attr = t.GetCustomAttribute<ControllerAttribute>();
-            return attr?.ResourceName;
-        }
+            => @this.GetType().GetCustomAttribute<ControllerAttribute>()?.ResourceName;
     }
 }

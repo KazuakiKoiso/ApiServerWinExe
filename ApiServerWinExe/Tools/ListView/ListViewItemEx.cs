@@ -18,12 +18,12 @@ namespace Tools.ListView
         /// <returns>生成された項目</returns>
         public static ListViewItemEx<T> FromColumns(T data, System.Windows.Forms.ListView.ColumnHeaderCollection columns)
         {
-            Type t = typeof(T);
-            Dictionary<string, PropertyInfo> properties = new Dictionary<string, PropertyInfo>();
-            List<string> lst = new List<string>();
+            var t = typeof(T);
+            var properties = new Dictionary<string, PropertyInfo>();
+            var list = new List<string>();
             foreach (ColumnHeader c in columns)
             {
-                string value = string.Empty;
+                var value = string.Empty;
 
                 if (c.Tag is Func<T, string> fnc)
                 {
@@ -31,25 +31,24 @@ namespace Tools.ListView
                 }
                 else if (!string.IsNullOrEmpty(c.Tag?.ToString()))
                 {
-                    string propName = c.Tag.ToString();
+                    var propName = c.Tag.ToString();
                     if (!properties.ContainsKey(propName))
                     {
                         properties[propName] = t.GetProperty(propName);
                     }
                     value = properties[propName].GetValue(data)?.ToString();
                 }
-                lst.Add(value);
+                list.Add(value);
             }
 
-            ListViewItemEx<T> result = new ListViewItemEx<T>(lst.ToArray());
-            result.Data = data;
-
-            return result;
+            return new ListViewItemEx<T>(list.ToArray())
+            {
+                Data = data
+            };
         }
 
         #region コンストラクタ
-        // 親クラスであるListViewItemのコンストラクタを
-        // とりあえず全てラッピングしたが不要だったかも
+        // 親クラスであるListViewItemのコンストラクタをとりあえず全てラッピング
         public ListViewItemEx() : base() { }
         public ListViewItemEx(ListViewGroup group) : base(group) { }
         public ListViewItemEx(string text) : base(text) { }
@@ -80,8 +79,8 @@ namespace Tools.ListView
             if (ListView.Columns.Count < SubItems.Count)
             {
                 // 列数がサブアイテム数より少ない場合は列数に合わせてサブアイテムを削除する
-                int diff = SubItems.Count - ListView.Columns.Count;
-                for (int i = 0; i < diff; i++)
+                var diff = SubItems.Count - ListView.Columns.Count;
+                for (var i = 0; i < diff; i++)
                 {
                     SubItems.RemoveAt(SubItems.Count - 1);
                 }
@@ -89,25 +88,25 @@ namespace Tools.ListView
             else if (ListView.Columns.Count > SubItems.Count)
             {
                 // 列数がサブアイテム数より多い場合は列数に合わせてサブアイテムを追加する
-                int diff = ListView.Columns.Count - SubItems.Count;
-                for (int i = 0; i < diff; i++)
+                var diff = ListView.Columns.Count - SubItems.Count;
+                for (var i = 0; i < diff; i++)
                 {
                     SubItems.Add("");
                 }
             }
 
-            Type t = typeof(T);
-            Dictionary<string, PropertyInfo> properties = new Dictionary<string, PropertyInfo>();
+            var t = typeof(T);
+            var properties = new Dictionary<string, PropertyInfo>();
             foreach (ColumnHeader c in ListView.Columns)
             {
-                string value = string.Empty;
+                var value = string.Empty;
                 if (c.Tag is Func<T, string> fnc)
                 {
                     value = fnc(Data);
                 }
                 else if (!string.IsNullOrEmpty(c.Tag?.ToString()))
                 {
-                    string propName = c.Tag.ToString();
+                    var propName = c.Tag.ToString();
                     if (!properties.ContainsKey(propName))
                     {
                         properties[propName] = t.GetProperty(propName);
