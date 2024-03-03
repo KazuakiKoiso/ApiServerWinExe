@@ -14,6 +14,15 @@ namespace ApiServerWinExe.Users
         /// <summary>データベース本体</summary>
         private List<UserData> _users = new List<UserData>();
 
+        /// <summary>データ追加イベント</summary>
+        public event EventHandler<UserData> UserAdded;
+
+        /// <summary>データ更新イベント</summary>
+        public event EventHandler<UserData> UserUpdated;
+
+        /// <summary>データ削除イベント</summary>
+        public event EventHandler<int> UserDeleted;
+
         /// <summary>コンストラクタ</summary>
         private UserRepository()
         {
@@ -60,6 +69,7 @@ namespace ApiServerWinExe.Users
                 throw new AddUserException(newUser);
             }
             _users.Add(newUser);
+            UserAdded?.Invoke(this, newUser);
         }
 
         /// <summary>ユーザ更新</summary>
@@ -73,6 +83,7 @@ namespace ApiServerWinExe.Users
             UserData record = _users.First(u => u.Id == user.Id);
             record.Name = user.Name;
             record.Mail = user.Mail;
+            UserUpdated?.Invoke(this, user);
         }
 
         /// <summary>ユーザ削除</summary>
@@ -84,6 +95,7 @@ namespace ApiServerWinExe.Users
                 throw new UserNotExistException(userId);
             }
             _users.Remove(_users.First(u => u.Id == userId));
+            UserDeleted?.Invoke(this, userId);
         }
     }
 }

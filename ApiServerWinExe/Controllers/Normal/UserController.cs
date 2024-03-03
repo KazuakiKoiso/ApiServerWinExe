@@ -72,7 +72,7 @@ namespace ApiServerWinExe.Controllers.Normal
             }
         }
 
-        /// <summary>ユーザ削除</summary>
+        /// <summary>ユーザ更新</summary>
         /// <param name="headers"></param>
         /// <param name="requestBody"></param>
         /// <param name="id"></param>
